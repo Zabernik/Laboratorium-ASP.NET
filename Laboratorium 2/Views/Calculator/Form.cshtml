@@ -1,0 +1,17 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<form action="Result" method="get">
+    <input type="number" name="dig1" step="0.0001"/><br/>
+    <select name="op">
+        <option value="add">Dodawanie</option>
+        <option value="sub">Odejmowanie</option>
+        <option value="mul">Mnożenie</option>
+        <option value="div">Dzielenie</option>
+    </select><br/>
+    <input type="number" name="dig2" step="0.0001"/><br/>
+    <button type="submit">Oblicz</button>
+</form>
