@@ -79,12 +79,6 @@ namespace Laboratorium_1.Controllers
             return View();
         }
 
-        public IActionResult Kalkulator([FromQuery(Name = "operator")] Operators? op, double? x, double? y)
-        {
-            if(op == null || x == null || y == null)
-            return View();
-        }
-
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
