@@ -4,27 +4,32 @@
     {
         public string Name { get; set; }
         public int Age { get; set; }
-        public DateTime Date { get; set; }
-        public DateTime Real { get; set; }
+        public DateTime? Date { get; set; }
 
         public bool IsValid()
-        {
-            CalculateDate();
-            if(Name is not null && Date > DateTime.Now) 
+        {         
+            if(CalculateDate() && Name is not null && Date.Value < DateTime.Now) 
             { 
                 return true; 
             }
             return false;
         }
 
-        private void CalculateDate()
+        private bool CalculateDate()
         {
-            Age = DateTime.Now.Year - Date.Year;            
+            if (Date is not null)
+            {
+                Age = DateTime.Now.Year - Date.Value.Year;
+                return true;
+            }  
+            else
+            {
+                return false;
+            }
         }
 
         public string ToString()
         {
-            CalculateDate();
             string result = $"Cześć {Name}, masz {Age} lat(a)";
             return result;
         }

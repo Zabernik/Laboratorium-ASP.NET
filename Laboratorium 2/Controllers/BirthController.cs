@@ -1,5 +1,6 @@
 ﻿using Laboratorium_2.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
 
 namespace Laboratorium_2.Controllers
 {
@@ -21,7 +22,7 @@ namespace Laboratorium_2.Controllers
             }
             else
             {
-                return View();
+                return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
             }
         }
     }
