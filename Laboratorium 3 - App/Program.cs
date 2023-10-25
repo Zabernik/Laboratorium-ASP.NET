@@ -1,3 +1,5 @@
+using Laboratorium_3___App.Models;
+
 namespace Laboratorium_3___App
 {
     public class Program
@@ -8,6 +10,7 @@ namespace Laboratorium_3___App
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddSingleton<IContactService, MemoryContactService>();
 
             var app = builder.Build();
 
