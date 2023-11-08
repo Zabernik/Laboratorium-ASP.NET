@@ -1,0 +1,18 @@
+﻿@model Product
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<h1>Dane produktu o id=@Model.Id to:</h1>
+<p>Nazwa - @Model.Name</p>
+<p>Cena - @Model.Price</p>
+<p>Producent - @Model.Producer</p>
+@if(Model.DateOfProdaction is not null)
+{
+    <p>Data produkcji - @Model.DateOfProdaction</p>
+}
+<form asp-action="Details" method="post">
+    <button class="btn btn-primary" action="Index">Powrót do Katalogu Produktów</button>
+</form>

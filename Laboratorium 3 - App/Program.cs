@@ -14,6 +14,12 @@ namespace Laboratorium_3___App
             builder.Services.AddDbContext<AppDbContext>();
             builder.Services.AddTransient<IContactService, EFContactService>();
 
+            builder.Services.AddControllersWithViews();
+            builder.Services.AddSingleton<IProductService, MemoryProductService>();
+
+            builder.Services.AddControllersWithViews();
+            builder.Services.AddSingleton<IDateTimeProvider, CurrentDateTimeProvider>();
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

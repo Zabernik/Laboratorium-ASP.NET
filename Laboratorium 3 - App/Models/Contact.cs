@@ -47,5 +47,8 @@ namespace Laboratorium_3___App.Models
         [Display(Name = "Data Urodzenia")]
         [DataType(DataType.Date)]
         public DateTime? Birth { get; set; }
+
+        [HiddenInput]
+        public DateTime Created { get; set; }
     }
 }

@@ -1,0 +1,34 @@
+﻿@model Product
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<h1>Edytuj produkt</h1>
+<form asp-controller="Product" asp-action="Update" method="post">
+    <input asp-for="Id"/>
+    <div class="mb-3">
+        <label asp-for="Name">Nazwa</label>
+        <input class="form-control" asp-for="Name" />
+        <span class="text-danger" asp-validation-for="Name"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Price">Cena</label>
+        <input class="form-control" asp-for="Price" />
+        <span class="text-danger" asp-validation-for="Price"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Description">Opis</label>
+        <input class="form-control" asp-for="Description" />
+        <span class="text-danger" asp-validation-for="Description"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="DateOfProdaction">Data Produkcji</label>
+        <input class="form-control" asp-for="DateOfProdaction" />
+        <span class="text-danger" asp-validation-for="DateOfProdaction"></span>
+    </div>
+    <div class="mb-3">
+        <button class="btn btn-primary" type="submit">Zapisz</button>
+    </div>
+</form>
