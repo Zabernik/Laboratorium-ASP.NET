@@ -9,9 +9,9 @@
 <p>Nazwa - @Model.Name</p>
 <p>Cena - @Model.Price</p>
 <p>Producent - @Model.Producer</p>
-@if(Model.DateOfProdaction is not null)
+@if (Model.DateOfProduction is not null)
 {
-    <p>Data produkcji - @Model.DateOfProdaction</p>
+    <p>Data produkcji - @Model.DateOfProduction</p>
 }
 <form asp-action="Details" method="post">
     <button class="btn btn-primary" action="Index">Powrót do Katalogu Produktów</button>

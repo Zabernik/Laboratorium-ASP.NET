@@ -40,8 +40,19 @@ namespace Data
                     Birth = new DateTime(1999, 8, 10) 
                 }
                 );
+            modelBuilder.Entity<ProductEntity>().HasData(
+                new ProductEntity()
+                {
+                    Id = 1,
+                    Name = "Mleko",
+                    Price = 4,
+                    Description = "Ot normalne mleko",
+                    DateOdProduction = new DateTime(2023, 11, 7)
+                }
+                );
         }
 
         public DbSet<ContactEntity> Contacts { get; set; }
+        public DbSet<ProductEntity> Products { get; set; }
     }
 }

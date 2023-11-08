@@ -25,9 +25,8 @@ namespace Laboratorium_3___App.Models
         public string Name { get; set; }
 
         [Display(Name = "Opis")]
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
-        [Required]
         [Display(Name = "Producent")]
         public Producer Producer { get; set; }
 
@@ -37,7 +36,7 @@ namespace Laboratorium_3___App.Models
 
         [Display(Name = "Data Produkcji")]
         [DataType(DataType.Date)]
-        public DateTime? DateOfProdaction { get; set; }
+        public DateTime? DateOfProduction { get; set; }
 
     }
 }
