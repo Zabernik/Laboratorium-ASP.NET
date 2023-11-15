@@ -9,7 +9,11 @@ using System.Threading.Tasks;
 namespace Data
 {
     public class AppDbContext : DbContext
-    {
+    { 
+        public DbSet<ContactEntity> Contacts { get; set; }
+        public DbSet<OrganizationEntity> Organizations { get; set; }
+
+    
         private string Path { get; set; }
         public AppDbContext()
         {
@@ -52,7 +56,6 @@ namespace Data
                 );
         }
 
-        public DbSet<ContactEntity> Contacts { get; set; }
         public DbSet<ProductEntity> Products { get; set; }
     }
 }

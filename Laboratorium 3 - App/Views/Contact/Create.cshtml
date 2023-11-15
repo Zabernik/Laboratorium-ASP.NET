@@ -31,7 +31,9 @@
         <label asp-for="Priority"></label>
         <select class="form-control" asp-for="Priority" asp-items="@Html.GetEnumSelectList<Priority>()"></select>
         <span class="text-danger" asp-validation-for="Priority"></span>
+        
     </div>
+
     <div class="mb-3">
         <button class="btn btn-primary" type="submit">Utwórz</button>
     </div>

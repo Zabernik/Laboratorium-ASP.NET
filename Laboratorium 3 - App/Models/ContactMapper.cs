@@ -13,6 +13,7 @@ namespace Laboratorium_3___App.Models
                     Email = entity.Email,
                     Phone = entity.Phone,
                     Birth = entity.Birth,
+                    //OrganizationId = entity.cośtam cośtam
                 };
             }
 
