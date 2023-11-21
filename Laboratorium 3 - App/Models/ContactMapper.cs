@@ -24,7 +24,7 @@ namespace Laboratorium_3___App.Models
                     Name = model.Name,
                     Email = model.Email,
                     Phone = model.Phone,
-                    Birth = model.Birth,
+                    Birth = (DateTime)model.Birth,
                 };
             }
         

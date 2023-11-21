@@ -14,13 +14,19 @@ namespace Data.Entities
         [Column("contact_id")]
         [Key]
         public int Id { get; set; }
+        [MaxLength(50)]
         [Required]
-        [StringLength(50)]
         public string Name { get; set; }
+        [MaxLength(50)]
         [Required]
         public string Email { get; set; }
-        [Required]
+        [MaxLength(12)]
+        [MinLength(9)]
         public string Phone { get; set; }
-        public DateTime? Birth{ get; set; }
+        [Column("birth_date")]
+        public DateTime Birth { get; set; }
+
+        public int OrganizationId { get; set; }
+        public OrganizationEntity? Organization { get; set; }
     }
 }

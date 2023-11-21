@@ -15,6 +15,7 @@ namespace Laboratorium_3___App
             builder.Services.AddTransient<IContactService, EFContactService>();
 
             builder.Services.AddControllersWithViews();
+            builder.Services.AddDbContext<AppDbContext>();
             builder.Services.AddSingleton<IProductService, MemoryProductService>();
 
             builder.Services.AddControllersWithViews();
