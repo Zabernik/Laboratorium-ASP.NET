@@ -49,5 +49,10 @@ namespace Laboratorium_3___App.Models
             using (var _context = new AppDbContext()) 
             return _context.Organizations.ToList();
         }
+
+        public PagingList<Contact> FindPage(int page, int size)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
