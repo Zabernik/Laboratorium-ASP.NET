@@ -28,7 +28,7 @@ namespace Laboratorium_3___App.Models
 
         public Contact? FindById(int id)
         {
-            return _items[id];
+            return _items.ContainsKey(id) ? _items[id] : null;
         }
 
         public void RemoveById(int id)
