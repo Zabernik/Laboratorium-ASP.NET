@@ -54,6 +54,16 @@ namespace Laboratorium_9
         [Fact]
         public void DeleteTest()
         {
+            var result = _controller.Delete(new Contact { ID = 1 });
+            var contact = new Contact() { ID = 1 };
+            int all = _service.FindAll().Count();
+
+            Assert.IsType<RedirectToActionResult>(result);
+
+            var red = result as RedirectToActionResult;
+            Assert.Equal("Index", red.ActionName);
+            var find = _service.FindById(contact.ID);
+            Assert.Null(find);
 
         }
     }
