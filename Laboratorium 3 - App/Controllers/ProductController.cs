@@ -1,5 +1,6 @@
 ﻿using Laboratorium_3___App.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Laboratorium_3___App.Controllers
 {
@@ -19,7 +20,12 @@ namespace Laboratorium_3___App.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            return View();
+            Product prod = new Product();
+            prod.Producers = _productService
+                .FindAllProducers()
+                .Select(o => new SelectListItem() { Text = o.Name })
+                .ToList();
+            return View(prod);
         }
 
         [HttpPost]
