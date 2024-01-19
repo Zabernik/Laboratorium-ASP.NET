@@ -13,7 +13,6 @@ namespace Laboratorium_3___App.Models
                 Price = entity.Price,
                 DateOfProduction = entity.DateOfProduction,
                 Description = entity.Description,
-                Price = entity.Price,
                 Category = (Category)entity.Category,
                 ProducerName = (string)entity.ProducerName,
             };

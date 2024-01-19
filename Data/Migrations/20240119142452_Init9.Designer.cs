@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240117165703_InitialCreate6")]
-    partial class InitialCreate6
+    [Migration("20240119142452_Init9")]
+    partial class Init9
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -120,12 +120,76 @@ namespace Data.Migrations
                         });
                 });
 
+            modelBuilder.Entity("Data.Entities.ProducerEntity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("NIP")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ProducerCategory")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Regon")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Producers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            NIP = "5260210530",
+                            Name = "PepsiCo",
+                            ProducerCategory = "Food",
+                            Regon = "012610700"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            NIP = "7962468402",
+                            Name = "BAT",
+                            ProducerCategory = "Cigarettes",
+                            Regon = "140471142"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            NIP = "5270203968",
+                            Name = "Nestle",
+                            ProducerCategory = "Food",
+                            Regon = "010006420"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            NIP = "5213390341",
+                            Name = "Unilever",
+                            ProducerCategory = "Chemistry",
+                            Regon = "140566233"
+                        });
+                });
+
             modelBuilder.Entity("Data.Entities.ProductEntity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER")
                         .HasColumnName("product_id");
+
+                    b.Property<int>("Category")
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateTime?>("DateOfProduction")
                         .HasColumnType("TEXT");
@@ -142,10 +206,16 @@ namespace Data.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("Producer")
+                    b.Property<int?>("ProducerId")
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("ProducerName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("ProducerId");
 
                     b.ToTable("products");
 
@@ -153,38 +223,42 @@ namespace Data.Migrations
                         new
                         {
                             Id = 1,
+                            Category = 0,
                             DateOfProduction = new DateTime(2023, 11, 19, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Ot normalne mleko",
                             Name = "Mleko",
                             Price = 4m,
-                            Producer = 1
+                            ProducerName = "Nestle"
                         },
                         new
                         {
                             Id = 2,
-                            DateOfProduction = new DateTime(2024, 1, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Napój gazowany",
-                            Name = "Cola",
+                            Category = 1,
+                            DateOfProduction = new DateTime(2023, 5, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Płyn do płukania prania",
+                            Name = "Cocolino",
                             Price = 5m,
-                            Producer = 2
+                            ProducerName = "Unilever"
                         },
                         new
                         {
                             Id = 3,
+                            Category = 1,
                             DateOfProduction = new DateTime(2024, 1, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Napój gazowany o smaku pomarańczowym",
                             Name = "Mirinda",
                             Price = 4m,
-                            Producer = 3
+                            ProducerName = "PepsiCo"
                         },
                         new
                         {
                             Id = 4,
+                            Category = 1,
                             DateOfProduction = new DateTime(2024, 1, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Napój gazowany",
                             Name = "Sprite",
                             Price = 6m,
-                            Producer = 2
+                            ProducerName = "PepsiCo"
                         });
                 });
 
@@ -216,10 +290,17 @@ namespace Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "62adf12b-1216-4ed4-a3e5-fe0cc720546a",
-                            ConcurrencyStamp = "62adf12b-1216-4ed4-a3e5-fe0cc720546a",
+                            Id = "57cba5ad-43fc-4f5e-8612-4915016afe0b",
+                            ConcurrencyStamp = "57cba5ad-43fc-4f5e-8612-4915016afe0b",
                             Name = "admin",
                             NormalizedName = "ADMIN"
+                        },
+                        new
+                        {
+                            Id = "dc8c740e-e080-444e-99d8-992fcd2f9836",
+                            ConcurrencyStamp = "e41a84fc-a856-4192-a6ec-b02f5a05e004",
+                            Name = "user",
+                            NormalizedName = "USER"
                         });
                 });
 
@@ -312,17 +393,17 @@ namespace Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "ed4cf424-9255-4fe3-9891-7d577f0a3cf7",
+                            Id = "2aeca659-31b7-446e-9add-863d9dfc39c0",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "53ed7468-39cc-4fd8-8fa2-b36e223622c6",
+                            ConcurrencyStamp = "a2e49c7d-cada-41ab-b0fe-e9a8a8256487",
                             Email = "test@wsei.edu.pl",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "TEST@WSEI.EDU.PL",
                             NormalizedUserName = "TEST",
-                            PasswordHash = "AQAAAAEAACcQAAAAEHxQ6sCe0KqwZQXFinsp8j5uFg8QlJMW1U2mSkKqKYl/0MqvBaxNfW8JchSryNikfQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEFcJTzce5m+shub8T5OgP5/3cKT6LXQkBYMqBaUiTnmd4++4KUBhV4D+JmEIk81RsA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "150f6de4-598a-41d7-9662-d32d8cd28af7",
+                            SecurityStamp = "4a56b650-098b-4d38-9ee3-4fd4a65b23a3",
                             TwoFactorEnabled = false,
                             UserName = "test"
                         });
@@ -390,8 +471,8 @@ namespace Data.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "ed4cf424-9255-4fe3-9891-7d577f0a3cf7",
-                            RoleId = "62adf12b-1216-4ed4-a3e5-fe0cc720546a"
+                            UserId = "2aeca659-31b7-446e-9add-863d9dfc39c0",
+                            RoleId = "57cba5ad-43fc-4f5e-8612-4915016afe0b"
                         });
                 });
 
@@ -477,6 +558,15 @@ namespace Data.Migrations
                     b.Navigation("Address");
                 });
 
+            modelBuilder.Entity("Data.Entities.ProductEntity", b =>
+                {
+                    b.HasOne("Data.Entities.ProducerEntity", "Producer")
+                        .WithMany("Products")
+                        .HasForeignKey("ProducerId");
+
+                    b.Navigation("Producer");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -531,6 +621,11 @@ namespace Data.Migrations
             modelBuilder.Entity("Data.Entities.OrganizationEntity", b =>
                 {
                     b.Navigation("Contacts");
+                });
+
+            modelBuilder.Entity("Data.Entities.ProducerEntity", b =>
+                {
+                    b.Navigation("Products");
                 });
 #pragma warning restore 612, 618
         }

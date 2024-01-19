@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Data.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class Init9 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -72,19 +72,19 @@ namespace Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "products",
+                name: "Producers",
                 columns: table => new
                 {
-                    product_id = table.Column<int>(type: "INTEGER", nullable: false)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(type: "TEXT", maxLength: 20, nullable: false),
-                    Price = table.Column<decimal>(type: "TEXT", nullable: false),
-                    DateOdProduction = table.Column<DateTime>(type: "TEXT", nullable: true),
-                    Description = table.Column<string>(type: "TEXT", nullable: false)
+                    Name = table.Column<string>(type: "TEXT", nullable: false),
+                    Regon = table.Column<string>(type: "TEXT", nullable: false),
+                    NIP = table.Column<string>(type: "TEXT", nullable: false),
+                    ProducerCategory = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_products", x => x.product_id);
+                    table.PrimaryKey("PK_Producers", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -217,15 +217,43 @@ namespace Data.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "products",
+                columns: table => new
+                {
+                    product_id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", maxLength: 20, nullable: false),
+                    Price = table.Column<decimal>(type: "TEXT", nullable: false),
+                    DateOfProduction = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    Description = table.Column<string>(type: "TEXT", nullable: false),
+                    Category = table.Column<int>(type: "INTEGER", nullable: false),
+                    ProducerName = table.Column<string>(type: "TEXT", nullable: false),
+                    ProducerId = table.Column<int>(type: "INTEGER", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_products", x => x.product_id);
+                    table.ForeignKey(
+                        name: "FK_products_Producers_ProducerId",
+                        column: x => x.ProducerId,
+                        principalTable: "Producers",
+                        principalColumn: "Id");
+                });
+
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "a074e746-062c-44e7-8e9a-1e03e0e23719", "a074e746-062c-44e7-8e9a-1e03e0e23719", "admin", "ADMIN" });
+                values: new object[,]
+                {
+                    { "57cba5ad-43fc-4f5e-8612-4915016afe0b", "57cba5ad-43fc-4f5e-8612-4915016afe0b", "admin", "ADMIN" },
+                    { "dc8c740e-e080-444e-99d8-992fcd2f9836", "e41a84fc-a856-4192-a6ec-b02f5a05e004", "user", "USER" }
+                });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "1e86f0fa-86d9-4d5f-b687-ae85a5ea3e55", 0, "68780d15-22e3-4b63-8df1-08869baaa5e2", "test@wsei.edu.pl", true, false, null, "TEST@WSEI.EDU.PL", "TEST", "AQAAAAEAACcQAAAAEAZQlmwgrdo5dayJKqE9vdHgWcDzxhTh3ILKmFOEI0zl4lHsVnoqMsWdDv2etJMlTw==", null, false, "92541ecb-ada7-4841-b7d7-63c433362ae0", false, "test" });
+                values: new object[] { "2aeca659-31b7-446e-9add-863d9dfc39c0", 0, "a2e49c7d-cada-41ab-b0fe-e9a8a8256487", "test@wsei.edu.pl", true, false, null, "TEST@WSEI.EDU.PL", "TEST", "AQAAAAEAACcQAAAAEFcJTzce5m+shub8T5OgP5/3cKT6LXQkBYMqBaUiTnmd4++4KUBhV4D+JmEIk81RsA==", null, false, "4a56b650-098b-4d38-9ee3-4fd4a65b23a3", false, "test" });
 
             migrationBuilder.InsertData(
                 table: "Organizations",
@@ -237,14 +265,31 @@ namespace Data.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "Producers",
+                columns: new[] { "Id", "NIP", "Name", "ProducerCategory", "Regon" },
+                values: new object[,]
+                {
+                    { 1, "5260210530", "PepsiCo", "Food", "012610700" },
+                    { 2, "7962468402", "BAT", "Cigarettes", "140471142" },
+                    { 3, "5270203968", "Nestle", "Food", "010006420" },
+                    { 4, "5213390341", "Unilever", "Chemistry", "140566233" }
+                });
+
+            migrationBuilder.InsertData(
                 table: "products",
-                columns: new[] { "product_id", "DateOdProduction", "Description", "Name", "Price" },
-                values: new object[] { 1, new DateTime(2023, 11, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), "Ot normalne mleko", "Mleko", 4m });
+                columns: new[] { "product_id", "Category", "DateOfProduction", "Description", "Name", "Price", "ProducerId", "ProducerName" },
+                values: new object[,]
+                {
+                    { 1, 0, new DateTime(2023, 11, 19, 0, 0, 0, 0, DateTimeKind.Unspecified), "Ot normalne mleko", "Mleko", 4m, null, "Nestle" },
+                    { 2, 1, new DateTime(2023, 5, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), "Płyn do płukania prania", "Cocolino", 5m, null, "Unilever" },
+                    { 3, 1, new DateTime(2024, 1, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), "Napój gazowany o smaku pomarańczowym", "Mirinda", 4m, null, "PepsiCo" },
+                    { 4, 1, new DateTime(2024, 1, 17, 0, 0, 0, 0, DateTimeKind.Unspecified), "Napój gazowany", "Sprite", 6m, null, "PepsiCo" }
+                });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
-                values: new object[] { "a074e746-062c-44e7-8e9a-1e03e0e23719", "1e86f0fa-86d9-4d5f-b687-ae85a5ea3e55" });
+                values: new object[] { "57cba5ad-43fc-4f5e-8612-4915016afe0b", "2aeca659-31b7-446e-9add-863d9dfc39c0" });
 
             migrationBuilder.InsertData(
                 table: "contacts",
@@ -296,6 +341,11 @@ namespace Data.Migrations
                 name: "IX_contacts_OrganizationId",
                 table: "contacts",
                 column: "OrganizationId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_products_ProducerId",
+                table: "products",
+                column: "ProducerId");
         }
 
         /// <inheritdoc />
@@ -330,6 +380,9 @@ namespace Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "Organizations");
+
+            migrationBuilder.DropTable(
+                name: "Producers");
         }
     }
 }

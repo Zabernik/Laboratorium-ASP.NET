@@ -287,15 +287,15 @@ namespace Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "fda578c0-dc26-4252-a06b-3ee555b47ab2",
-                            ConcurrencyStamp = "fda578c0-dc26-4252-a06b-3ee555b47ab2",
+                            Id = "57cba5ad-43fc-4f5e-8612-4915016afe0b",
+                            ConcurrencyStamp = "57cba5ad-43fc-4f5e-8612-4915016afe0b",
                             Name = "admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "921915fb-f73d-430e-addd-ef9759cf8a81",
-                            ConcurrencyStamp = "921915fb-f73d-430e-addd-ef9759cf8a81",
+                            Id = "dc8c740e-e080-444e-99d8-992fcd2f9836",
+                            ConcurrencyStamp = "e41a84fc-a856-4192-a6ec-b02f5a05e004",
                             Name = "user",
                             NormalizedName = "USER"
                         });
@@ -390,19 +390,19 @@ namespace Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "4773d3c4-b0ce-4b0c-a181-911cea7332fd",
+                            Id = "2aeca659-31b7-446e-9add-863d9dfc39c0",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "16546612-996d-4ad1-a2ac-0b4d5df058b8",
-                            Email = "admin@wsei.edu.pl",
+                            ConcurrencyStamp = "a2e49c7d-cada-41ab-b0fe-e9a8a8256487",
+                            Email = "test@wsei.edu.pl",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
-                            NormalizedEmail = "ADMIN@WSEI.EDU.PL",
-                            NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAENWl5lMza3MWTTF6ydmiJSPxYFPrAAn1Yj5stUNOlU6GfmJhLrG8JUKCAm5tjbg0Ew==",
+                            NormalizedEmail = "TEST@WSEI.EDU.PL",
+                            NormalizedUserName = "TEST",
+                            PasswordHash = "AQAAAAEAACcQAAAAEFcJTzce5m+shub8T5OgP5/3cKT6LXQkBYMqBaUiTnmd4++4KUBhV4D+JmEIk81RsA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "8ec1cfce-e8e4-4f4a-a66b-098da0d0002a",
+                            SecurityStamp = "4a56b650-098b-4d38-9ee3-4fd4a65b23a3",
                             TwoFactorEnabled = false,
-                            UserName = "admin"
+                            UserName = "test"
                         });
                 });
 
@@ -468,13 +468,8 @@ namespace Data.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "4773d3c4-b0ce-4b0c-a181-911cea7332fd",
-                            RoleId = "fda578c0-dc26-4252-a06b-3ee555b47ab2"
-                        },
-                        new
-                        {
-                            UserId = "acd851af-9b21-460b-892e-7147b17fca7a",
-                            RoleId = "921915fb-f73d-430e-addd-ef9759cf8a81"
+                            UserId = "2aeca659-31b7-446e-9add-863d9dfc39c0",
+                            RoleId = "57cba5ad-43fc-4f5e-8612-4915016afe0b"
                         });
                 });
 
@@ -628,48 +623,6 @@ namespace Data.Migrations
             modelBuilder.Entity("Data.Entities.ProducerEntity", b =>
                 {
                     b.Navigation("Products");
-                });
-
-            modelBuilder.Entity("Data.Entities.ProductEntity", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER")
-                        .HasColumnName("product_id");
-
-                    b.Property<DateTime?>("DateOfProduction")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("TEXT");
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("products");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            DateOfProduction = new DateTime(2023, 11, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Mleko",
-                            Price = 20.99m
-                        },
-                        new
-                        {
-                            Id = 2,
-                            DateOfProduction = new DateTime(2020, 11, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Kolka",
-                            Price = 4.20m
-                        });
                 });
 #pragma warning restore 612, 618
         }
