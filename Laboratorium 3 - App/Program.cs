@@ -45,8 +45,8 @@ namespace Laboratorium_3___App
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
             app.UseRouting();
+            app.UseMiddleware<LastVisitCookie>();
             app.UseAuthentication();
             app.UseAuthorization();
             app.UseSession();
@@ -54,6 +54,7 @@ namespace Laboratorium_3___App
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
+
             app.Run();
         }
     }

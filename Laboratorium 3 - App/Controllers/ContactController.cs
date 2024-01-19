@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Laboratorium_3___App.Controllers
 {
-    [Authorize(Roles = "admin")]
+    //[Authorize(Roles = "admin")]
     public class ContactController : Controller
     {
 
@@ -24,15 +24,18 @@ namespace Laboratorium_3___App.Controllers
             return View(_contactService.FindAll());
         }
 
+        public IActionResult PagedIndex(int page = 1, int size = 5)
+        {
+            if (size < 2)
+                return BadRequest();
+            return View(_contactService.FindPage(page, size));
+        }
+
         [HttpGet]
         public IActionResult Create()
         {
-            Contact model = new Contact();
-            model.Organizations = _contactService
-                .FindAllOrganizations()
-                .Select(o => new SelectListItem() { Value = o.Id.ToString(), Text = o.Title})
-                .ToList();
-            return View(model);
+            //Contact contact = new Contact() { Organizations = _contactService.FindAllOrganizations() };
+            return View();
         }
 
         [HttpPost]
@@ -53,11 +56,24 @@ namespace Laboratorium_3___App.Controllers
                 _contactService.Add(model);
                 return RedirectToAction("Index");
             }
-            else
-            {
-                return View(model);
-            }
+            return View(model);
         }
+        public IActionResult CreateApi()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult CreateApi(Contact model)
+        {
+            if (ModelState.IsValid)
+            {
+                _contactService.Add(model);
+                return RedirectToAction("Index");
+            }
+            return View(model);
+        }
+
         [HttpGet]
         public IActionResult Update(int id)
         {
@@ -91,12 +107,20 @@ namespace Laboratorium_3___App.Controllers
         [HttpGet]
         public IActionResult Details(int id)
         {
-            return View(_contactService.FindById(id));
+            var find = _contactService.FindById(id);
+            if(find is null)
+                return NotFound();
+            return View(find);
         }
         [HttpPost]
         public IActionResult Details() 
         {
             return RedirectToAction("Index");
         }
+
+        //private List<SelectListItem> CreateList()
+        //{
+        //    return _contactService.FindAllOrganizations();
+        //} nie bedzie dzialac
     }
 }
