@@ -629,6 +629,48 @@ namespace Data.Migrations
                 {
                     b.Navigation("Products");
                 });
+
+            modelBuilder.Entity("Data.Entities.ProductEntity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("product_id");
+
+                    b.Property<DateTime?>("DateOfProduction")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("TEXT");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("products");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            DateOfProduction = new DateTime(2023, 11, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Mleko",
+                            Price = 20.99m
+                        },
+                        new
+                        {
+                            Id = 2,
+                            DateOfProduction = new DateTime(2020, 11, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Kolka",
+                            Price = 4.20m
+                        });
+                });
 #pragma warning restore 612, 618
         }
     }

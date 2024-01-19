@@ -24,6 +24,7 @@ namespace Data
             var path = Environment.GetFolderPath(folder);
             Path = System.IO.Path.Join(path, "contacts.db");
         }
+
         protected override void OnConfiguring(DbContextOptionsBuilder options) =>
         options.UseSqlite($"Data Source={Path}");
 

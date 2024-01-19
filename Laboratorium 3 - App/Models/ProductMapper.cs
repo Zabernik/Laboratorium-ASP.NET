@@ -10,6 +10,7 @@ namespace Laboratorium_3___App.Models
             {
                 Id = entity.Id,
                 Name = entity.Name,
+                Price = entity.Price,
                 DateOfProduction = entity.DateOfProduction,
                 Description = entity.Description,
                 Price = entity.Price,

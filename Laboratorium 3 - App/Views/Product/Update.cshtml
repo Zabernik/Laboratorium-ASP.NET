@@ -5,7 +5,7 @@
 @{
 }
 
-<h1>Edytuj produkt</h1>
+<h1>Edytuj Produkt</h1>
 <form asp-controller="Product" asp-action="Update" method="post">
     <input asp-for="Id"/>
     <div class="mb-3">
@@ -19,7 +19,7 @@
         <span class="text-danger" asp-validation-for="Price"></span>
     </div>
     <div class="mb-3">
-        <label asp-for="Description">Opis</label>
+        <label asp-for="Description">Opis Produktu</label>
         <input class="form-control" asp-for="Description" />
         <span class="text-danger" asp-validation-for="Description"></span>
     </div>

@@ -1,21 +1,16 @@
 ﻿using Laboratorium_3___App.Models;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Laboratorium_3___App.Controllers
 {
     public class ProductController : Controller
     {
-        private readonly IProductService _productService;
-
+        private IProductService _productService;
         public ProductController(IProductService productService)
         {
             _productService = productService;
         }
 
-        [AllowAnonymous]
         public IActionResult Index()
         {
             return View(_productService.FindAll());
@@ -24,25 +19,20 @@ namespace Laboratorium_3___App.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            Product model = new Product();
-            model.Producers = _productService
-                .FindAllProducers()
-                .Select(x => new SelectListItem() { Text = x.Name })
-                .ToList();
-            return View(model);
+            return View();
         }
 
         [HttpPost]
-        public IActionResult Create(Product model)
+        public IActionResult Create(Product prod)
         {
             if (ModelState.IsValid)
             {
-                _productService.Add(model);
+                _productService.Add(prod);
                 return RedirectToAction("Index");
             }
             else
             {
-                return View(model);
+                return View(prod);
             }
         }
 
@@ -53,11 +43,11 @@ namespace Laboratorium_3___App.Controllers
         }
 
         [HttpPost]
-        public IActionResult Update(Product model)
+        public IActionResult Update(Product prod)
         {
             if (ModelState.IsValid)
             {
-                _productService.Update(model);
+                _productService.Update(prod);
                 return RedirectToAction("Index");
             }
             return View();
@@ -70,10 +60,21 @@ namespace Laboratorium_3___App.Controllers
         }
 
         [HttpPost]
-        public IActionResult Delete(Product model)
+        public IActionResult Delete(Product prod, string submitAction)
         {
-            _productService.RemoveById(model.Id);
-            return RedirectToAction("Index");
+            if (submitAction == "Tak")
+            {
+                _productService.RemoveById(prod.Id);
+                return RedirectToAction("Index");
+            }
+            else if (submitAction == "Nie")
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
         }
 
         [HttpGet]
