@@ -12,10 +12,12 @@ namespace Laboratorium_3___App.Models
             _context = context;
         }
 
-        public void Add(Contact contact)
+        public int Add(Contact contact)
         {
-            _context.Contacts.Add(ContactMapper.ToEntity(contact));
+            var e = _context.Contacts.Add(ContactMapper.ToEntity(contact));
+            int id = e.Entity.Id;
             _context.SaveChanges();
+            return id;
         }
 
         public List<Contact> FindAll()

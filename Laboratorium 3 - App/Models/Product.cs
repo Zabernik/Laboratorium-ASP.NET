@@ -1,18 +1,20 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System.ComponentModel.DataAnnotations;
 
 namespace Laboratorium_3___App.Models
 {
-    public enum Producer
+    public enum Category
     {
-        [Display(Name = "Nestle")]
-        Nestle,
-        [Display(Name = "Coca-Cola")]
-        Cocacola,
-        [Display(Name = "Pepsi")]
-        Pepsi,
-        [Display(Name = "British American Tobacco")]
-        BAT
+        [Display(Name = "Produkty mleczne")]
+        Milky,
+        [Display(Name = "Napoje")]
+        Drinks,
+        [Display(Name = "Produkty chemiczne")]
+        ChemicalProducts,
+        [Display(Name = "Inne")]
+        Other
     }
 
     public class Product
@@ -28,7 +30,10 @@ namespace Laboratorium_3___App.Models
         public string? Description { get; set; }
 
         [Display(Name = "Producent")]
-        public Producer Producer { get; set; }
+        public string ProducerName { get; set; }
+
+        [Display(Name = "Kategoria")]
+        public Category Category { get; set; }
 
         [Display(Name = "Cena")]
         [Required]
@@ -38,5 +43,7 @@ namespace Laboratorium_3___App.Models
         [DataType(DataType.Date)]
         public DateTime? DateOfProduction { get; set; }
 
+        [ValidateNever]
+        public List<SelectListItem> Producers { get; set; }
     }
 }

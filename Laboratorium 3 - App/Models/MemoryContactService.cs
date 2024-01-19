@@ -9,11 +9,15 @@ namespace Laboratorium_3___App.Models
 
         private readonly Dictionary<int, Contact> _items = new Dictionary<int, Contact>();
         private int id = 1;
-        public void Add(Contact contact)
+        public int Add(Contact contact)
         {
-            contact.Created = _timeProvider.GetTime();
-            contact.ID = id++;
+            int id = _items.Keys.Count != 0 ? _items.Keys.Max() : 0;
+            contact.ID = id + 1;
             _items.Add(contact.ID, contact);
+            return contact.ID;
+            //contact.Created = _timeProvider.GetTime();
+            //contact.ID = id++;
+            //_items.Add(contact.ID, contact);
         }
 
         public MemoryContactService(IDateTimeProvider time)

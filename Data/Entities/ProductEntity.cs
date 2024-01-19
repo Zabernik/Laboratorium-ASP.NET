@@ -19,7 +19,10 @@ namespace Data.Entities
         public string Name { get; set; }
         [Required]
         public decimal Price { get; set; }
-        public DateTime? DateOdProduction { get; set; }
+        public DateTime? DateOfProduction { get; set; }
         public string Description { get; set; }
+        public int Category { get; set; }
+        public string ProducerName { get; set; }
+        public ProducerEntity? Producer { get; set; }
     }
 }

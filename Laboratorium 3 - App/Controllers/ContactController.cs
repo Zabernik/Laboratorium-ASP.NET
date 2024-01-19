@@ -27,22 +27,36 @@ namespace Laboratorium_3___App.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            return View();
+            Contact model = new Contact();
+            model.Organizations = _contactService
+                .FindAllOrganizations()
+                .Select(o => new SelectListItem() { Value = o.Id.ToString(), Text = o.Title})
+                .ToList();
+            return View(model);
         }
 
         [HttpPost]
         public IActionResult Create(Contact model)
         {
+            //if (ModelState.IsValid)
+            //{
+            //    _contactService.Add(model);
+            //    return RedirectToAction("Index");
+            //}
+            //model.Organizations = _contactService
+            //    .FindAllOrganizations()
+            //    .Select(o => new SelectListItem() { Value = o.Id.ToString(), Text = o.Title })
+            //    .ToList();
+            //return View(model);
             if (ModelState.IsValid)
             {
                 _contactService.Add(model);
                 return RedirectToAction("Index");
             }
-            model.Organizations = _contactService
-                .FindAllOrganizations()
-                .Select(o => new SelectListItem() { Value = o.Id.ToString(), Text = o.Title })
-                .ToList();
-            return View(model);
+            else
+            {
+                return View(model);
+            }
         }
         [HttpGet]
         public IActionResult Update(int id)

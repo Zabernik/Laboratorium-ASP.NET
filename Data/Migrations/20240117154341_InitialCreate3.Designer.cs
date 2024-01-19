@@ -3,6 +3,7 @@ using System;
 using Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240117154341_InitialCreate3")]
+    partial class InitialCreate3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.13");
@@ -117,76 +120,12 @@ namespace Data.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Data.Entities.ProducerEntity", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("NIP")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("ProducerCategory")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Regon")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Producers");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            NIP = "5260210530",
-                            Name = "PepsiCo",
-                            ProducerCategory = "Food",
-                            Regon = "012610700"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            NIP = "7962468402",
-                            Name = "BAT",
-                            ProducerCategory = "Cigarettes",
-                            Regon = "140471142"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            NIP = "5270203968",
-                            Name = "Nestle",
-                            ProducerCategory = "Food",
-                            Regon = "010006420"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            NIP = "5213390341",
-                            Name = "Unilever",
-                            ProducerCategory = "Chemistry",
-                            Regon = "140566233"
-                        });
-                });
-
             modelBuilder.Entity("Data.Entities.ProductEntity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER")
                         .HasColumnName("product_id");
-
-                    b.Property<int>("Category")
-                        .HasColumnType("INTEGER");
 
                     b.Property<DateTime?>("DateOfProduction")
                         .HasColumnType("TEXT");
@@ -203,16 +142,7 @@ namespace Data.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("ProducerId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("ProducerName")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("ProducerId");
 
                     b.ToTable("products");
 
@@ -220,42 +150,18 @@ namespace Data.Migrations
                         new
                         {
                             Id = 1,
-                            Category = 0,
-                            DateOfProduction = new DateTime(2023, 11, 19, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateOfProduction = new DateTime(2023, 11, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Ot normalne mleko",
                             Name = "Mleko",
-                            Price = 4m,
-                            ProducerName = "Nestle"
+                            Price = 4m
                         },
                         new
                         {
                             Id = 2,
-                            Category = 1,
-                            DateOfProduction = new DateTime(2023, 5, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Płyn do płukania prania",
-                            Name = "Cocolino",
-                            Price = 5m,
-                            ProducerName = "Unilever"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Category = 1,
-                            DateOfProduction = new DateTime(2024, 1, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Napój gazowany o smaku pomarańczowym",
-                            Name = "Mirinda",
-                            Price = 4m,
-                            ProducerName = "PepsiCo"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Category = 1,
-                            DateOfProduction = new DateTime(2024, 1, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Napój gazowany",
-                            Name = "Sprite",
-                            Price = 6m,
-                            ProducerName = "PepsiCo"
+                            DateOfProduction = new DateTime(2024, 1, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Ot chlebek",
+                            Name = "Chleb",
+                            Price = 5m
                         });
                 });
 
@@ -287,17 +193,10 @@ namespace Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "fda578c0-dc26-4252-a06b-3ee555b47ab2",
-                            ConcurrencyStamp = "fda578c0-dc26-4252-a06b-3ee555b47ab2",
+                            Id = "a3004529-cf42-4180-970e-1d9c4ba5f541",
+                            ConcurrencyStamp = "a3004529-cf42-4180-970e-1d9c4ba5f541",
                             Name = "admin",
                             NormalizedName = "ADMIN"
-                        },
-                        new
-                        {
-                            Id = "921915fb-f73d-430e-addd-ef9759cf8a81",
-                            ConcurrencyStamp = "921915fb-f73d-430e-addd-ef9759cf8a81",
-                            Name = "user",
-                            NormalizedName = "USER"
                         });
                 });
 
@@ -390,19 +289,19 @@ namespace Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "4773d3c4-b0ce-4b0c-a181-911cea7332fd",
+                            Id = "c113b6f8-99c1-40d7-84bd-3dfe8d778304",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "16546612-996d-4ad1-a2ac-0b4d5df058b8",
-                            Email = "admin@wsei.edu.pl",
+                            ConcurrencyStamp = "0938bd56-9129-4ec8-a0b5-da13bafb61c9",
+                            Email = "test@wsei.edu.pl",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
-                            NormalizedEmail = "ADMIN@WSEI.EDU.PL",
-                            NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAENWl5lMza3MWTTF6ydmiJSPxYFPrAAn1Yj5stUNOlU6GfmJhLrG8JUKCAm5tjbg0Ew==",
+                            NormalizedEmail = "TEST@WSEI.EDU.PL",
+                            NormalizedUserName = "TEST",
+                            PasswordHash = "AQAAAAEAACcQAAAAEJLdUXjdwTBWHqW4le4wWZHE3EQc+Ghe+J6jUMpLxtc59T5sK+zTem0TK+aAYxHiMw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "8ec1cfce-e8e4-4f4a-a66b-098da0d0002a",
+                            SecurityStamp = "a067575e-25ff-49d3-865b-590e41775f9b",
                             TwoFactorEnabled = false,
-                            UserName = "admin"
+                            UserName = "test"
                         });
                 });
 
@@ -468,13 +367,8 @@ namespace Data.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "4773d3c4-b0ce-4b0c-a181-911cea7332fd",
-                            RoleId = "fda578c0-dc26-4252-a06b-3ee555b47ab2"
-                        },
-                        new
-                        {
-                            UserId = "acd851af-9b21-460b-892e-7147b17fca7a",
-                            RoleId = "921915fb-f73d-430e-addd-ef9759cf8a81"
+                            UserId = "c113b6f8-99c1-40d7-84bd-3dfe8d778304",
+                            RoleId = "a3004529-cf42-4180-970e-1d9c4ba5f541"
                         });
                 });
 
@@ -560,15 +454,6 @@ namespace Data.Migrations
                     b.Navigation("Address");
                 });
 
-            modelBuilder.Entity("Data.Entities.ProductEntity", b =>
-                {
-                    b.HasOne("Data.Entities.ProducerEntity", "Producer")
-                        .WithMany("Products")
-                        .HasForeignKey("ProducerId");
-
-                    b.Navigation("Producer");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -623,11 +508,6 @@ namespace Data.Migrations
             modelBuilder.Entity("Data.Entities.OrganizationEntity", b =>
                 {
                     b.Navigation("Contacts");
-                });
-
-            modelBuilder.Entity("Data.Entities.ProducerEntity", b =>
-                {
-                    b.Navigation("Products");
                 });
 #pragma warning restore 612, 618
         }

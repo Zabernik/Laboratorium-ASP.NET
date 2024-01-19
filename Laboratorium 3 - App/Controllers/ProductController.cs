@@ -1,6 +1,8 @@
 ﻿using Laboratorium_3___App.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Laboratorium_3___App.Controllers
 {
@@ -13,6 +15,7 @@ namespace Laboratorium_3___App.Controllers
             _productService = productService;
         }
 
+        [AllowAnonymous]
         public IActionResult Index()
         {
             return View(_productService.FindAll());
@@ -21,7 +24,12 @@ namespace Laboratorium_3___App.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            return View();
+            Product model = new Product();
+            model.Producers = _productService
+                .FindAllProducers()
+                .Select(x => new SelectListItem() { Text = x.Name })
+                .ToList();
+            return View(model);
         }
 
         [HttpPost]

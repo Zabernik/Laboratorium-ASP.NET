@@ -28,5 +28,7 @@ namespace Data.Entities
 
         public int OrganizationId { get; set; }
         public OrganizationEntity? Organization { get; set; }
+
+        public int Priority { get; set; }
     }
 }

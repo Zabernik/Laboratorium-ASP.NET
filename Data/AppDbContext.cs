@@ -13,6 +13,7 @@ namespace Data
     public class AppDbContext : IdentityDbContext<IdentityUser>
     {
         public DbSet<ContactEntity> Contacts { get; set; }
+        public DbSet<ProducerEntity> Producers { get; set; }
         public DbSet<ProductEntity> Products { get; set; }
         public DbSet<OrganizationEntity> Organizations { get; set; }
 
@@ -47,6 +48,13 @@ namespace Data
                 NormalizedName = "ADMIN",
             };
 
+            var userRole = new IdentityRole()
+            {
+                Id = Guid.NewGuid().ToString(),
+                Name = "user",
+                NormalizedName = "USER",
+            };
+
             adminRole.ConcurrencyStamp = adminRole.Id;
 
             PasswordHasher<IdentityUser> passwordHasher = new PasswordHasher<IdentityUser>();
@@ -58,6 +66,8 @@ namespace Data
 
             modelBuilder.Entity<IdentityRole>() 
                 .HasData(adminRole);
+            modelBuilder.Entity<IdentityRole>()
+                .HasData(userRole);
 
             modelBuilder.Entity<IdentityUserRole<string>>()
                 .HasData(
@@ -123,9 +133,74 @@ namespace Data
                     Name = "Mleko",
                     Price = 4,
                     Description = "Ot normalne mleko",
-                    DateOdProduction = new DateTime(2023, 11, 7)
+                    DateOfProduction = new DateTime(2023, 11, 19),
+                    Category = 0,
+                    ProducerName = "Nestle"
+                },
+                new ProductEntity()
+                {
+                    Id = 2,
+                    Name = "Cocolino",
+                    Price = 5,
+                    Description = "Płyn do płukania prania",
+                    DateOfProduction = new DateTime(2023, 05, 08),
+                    Category = 1,
+                    ProducerName = "Unilever"
+                },
+                new ProductEntity()
+                {
+                    Id = 3,
+                    Name = "Mirinda",
+                    Price = 4,
+                    Description = "Napój gazowany o smaku pomarańczowym",
+                    DateOfProduction = new DateTime(2024, 01, 05),
+                    Category = 1,
+                    ProducerName = "PepsiCo"
+                },
+                new ProductEntity()
+                {
+                    Id = 4,
+                    Name = "Sprite",
+                    Price = 6,
+                    Description = "Napój gazowany",
+                    DateOfProduction = new DateTime(2024, 01, 17),
+                    Category = 1,
+                    ProducerName = "PepsiCo"
                 }
                 );
+            modelBuilder.Entity<ProducerEntity>().HasData(
+                new ProducerEntity()
+                {
+                    Id = 1,
+                    Name = "PepsiCo",
+                    Regon = "012610700",
+                    NIP = "5260210530",
+                    ProducerCategory = "Food"
+                },
+                new ProducerEntity()
+                {
+                    Id = 2,
+                    Name = "BAT",
+                    Regon = "140471142",
+                    NIP = "7962468402",
+                    ProducerCategory = "Cigarettes"
+                },
+                new ProducerEntity()
+                {
+                    Id = 3,
+                    Name = "Nestle",
+                    Regon = "010006420",
+                    NIP = "5270203968",
+                    ProducerCategory = "Food"
+                },
+                new ProducerEntity()
+                {
+                    Id = 4,
+                    Name = "Unilever",
+                    Regon = "140566233",
+                    NIP = "5213390341",
+                    ProducerCategory = "Chemistry"
+                });
         }
     }
 }

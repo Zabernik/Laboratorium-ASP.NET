@@ -3,6 +3,7 @@ using System;
 using Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240117193810_InitialCreate8")]
+    partial class InitialCreate8
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.13");
@@ -141,7 +144,7 @@ namespace Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Producers");
+                    b.ToTable("ProducerEntity");
 
                     b.HasData(
                         new
@@ -287,17 +290,10 @@ namespace Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "fda578c0-dc26-4252-a06b-3ee555b47ab2",
-                            ConcurrencyStamp = "fda578c0-dc26-4252-a06b-3ee555b47ab2",
+                            Id = "c47092c1-6239-4ae5-a731-ae08b5291dd8",
+                            ConcurrencyStamp = "c47092c1-6239-4ae5-a731-ae08b5291dd8",
                             Name = "admin",
                             NormalizedName = "ADMIN"
-                        },
-                        new
-                        {
-                            Id = "921915fb-f73d-430e-addd-ef9759cf8a81",
-                            ConcurrencyStamp = "921915fb-f73d-430e-addd-ef9759cf8a81",
-                            Name = "user",
-                            NormalizedName = "USER"
                         });
                 });
 
@@ -390,19 +386,19 @@ namespace Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "4773d3c4-b0ce-4b0c-a181-911cea7332fd",
+                            Id = "7e477ebc-b6ca-4991-956d-fbee593283f1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "16546612-996d-4ad1-a2ac-0b4d5df058b8",
-                            Email = "admin@wsei.edu.pl",
+                            ConcurrencyStamp = "2d4b4376-136d-422c-8061-86bc7619c3b9",
+                            Email = "test@wsei.edu.pl",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
-                            NormalizedEmail = "ADMIN@WSEI.EDU.PL",
-                            NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAENWl5lMza3MWTTF6ydmiJSPxYFPrAAn1Yj5stUNOlU6GfmJhLrG8JUKCAm5tjbg0Ew==",
+                            NormalizedEmail = "TEST@WSEI.EDU.PL",
+                            NormalizedUserName = "TEST",
+                            PasswordHash = "AQAAAAEAACcQAAAAENt8XplVIovOfEZJjpQQREmguOx2G+ffvJdSncyAPcIyV4Te8TRlkwk9PVmwDDAUrA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "8ec1cfce-e8e4-4f4a-a66b-098da0d0002a",
+                            SecurityStamp = "4b9166cf-0a07-47bc-af30-393ee087b822",
                             TwoFactorEnabled = false,
-                            UserName = "admin"
+                            UserName = "test"
                         });
                 });
 
@@ -468,13 +464,8 @@ namespace Data.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "4773d3c4-b0ce-4b0c-a181-911cea7332fd",
-                            RoleId = "fda578c0-dc26-4252-a06b-3ee555b47ab2"
-                        },
-                        new
-                        {
-                            UserId = "acd851af-9b21-460b-892e-7147b17fca7a",
-                            RoleId = "921915fb-f73d-430e-addd-ef9759cf8a81"
+                            UserId = "7e477ebc-b6ca-4991-956d-fbee593283f1",
+                            RoleId = "c47092c1-6239-4ae5-a731-ae08b5291dd8"
                         });
                 });
 

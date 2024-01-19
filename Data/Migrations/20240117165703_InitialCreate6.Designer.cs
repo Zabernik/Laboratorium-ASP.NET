@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20231122134053_identity")]
-    partial class identity
+    [Migration("20240117165703_InitialCreate6")]
+    partial class InitialCreate6
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -49,6 +49,9 @@ namespace Data.Migrations
                         .HasMaxLength(12)
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("Priority")
+                        .HasColumnType("INTEGER");
+
                     b.HasKey("Id");
 
                     b.HasIndex("OrganizationId");
@@ -63,7 +66,8 @@ namespace Data.Migrations
                             Email = "adam@wsei.edu.pl",
                             Name = "Adam",
                             OrganizationId = 1,
-                            Phone = "127813268163"
+                            Phone = "127813268163",
+                            Priority = 0
                         },
                         new
                         {
@@ -72,7 +76,8 @@ namespace Data.Migrations
                             Email = "ewa@wsei.edu.pl",
                             Name = "Ewa",
                             OrganizationId = 2,
-                            Phone = "293443823478"
+                            Phone = "293443823478",
+                            Priority = 0
                         });
                 });
 
@@ -122,7 +127,7 @@ namespace Data.Migrations
                         .HasColumnType("INTEGER")
                         .HasColumnName("product_id");
 
-                    b.Property<DateTime?>("DateOdProduction")
+                    b.Property<DateTime?>("DateOfProduction")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Description")
@@ -137,6 +142,9 @@ namespace Data.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("Producer")
+                        .HasColumnType("INTEGER");
+
                     b.HasKey("Id");
 
                     b.ToTable("products");
@@ -145,10 +153,38 @@ namespace Data.Migrations
                         new
                         {
                             Id = 1,
-                            DateOdProduction = new DateTime(2023, 11, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateOfProduction = new DateTime(2023, 11, 19, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Ot normalne mleko",
                             Name = "Mleko",
-                            Price = 4m
+                            Price = 4m,
+                            Producer = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            DateOfProduction = new DateTime(2024, 1, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Napój gazowany",
+                            Name = "Cola",
+                            Price = 5m,
+                            Producer = 2
+                        },
+                        new
+                        {
+                            Id = 3,
+                            DateOfProduction = new DateTime(2024, 1, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Napój gazowany o smaku pomarańczowym",
+                            Name = "Mirinda",
+                            Price = 4m,
+                            Producer = 3
+                        },
+                        new
+                        {
+                            Id = 4,
+                            DateOfProduction = new DateTime(2024, 1, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Napój gazowany",
+                            Name = "Sprite",
+                            Price = 6m,
+                            Producer = 2
                         });
                 });
 
@@ -180,8 +216,8 @@ namespace Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "8dd315eb-5034-4d8d-8a4b-7096824e654d",
-                            ConcurrencyStamp = "8dd315eb-5034-4d8d-8a4b-7096824e654d",
+                            Id = "62adf12b-1216-4ed4-a3e5-fe0cc720546a",
+                            ConcurrencyStamp = "62adf12b-1216-4ed4-a3e5-fe0cc720546a",
                             Name = "admin",
                             NormalizedName = "ADMIN"
                         });
@@ -276,17 +312,17 @@ namespace Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "b79456ef-4672-45d7-b918-6404424bd858",
+                            Id = "ed4cf424-9255-4fe3-9891-7d577f0a3cf7",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "2f3e9326-2d6c-4f24-8ba1-0e7d5537f78a",
+                            ConcurrencyStamp = "53ed7468-39cc-4fd8-8fa2-b36e223622c6",
                             Email = "test@wsei.edu.pl",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "TEST@WSEI.EDU.PL",
                             NormalizedUserName = "TEST",
-                            PasswordHash = "AQAAAAEAACcQAAAAECkdylPwsO+mXNHLB3F0BVNBt9MHV5ki/+2vKhNT+EzBNN5r9gbIsEsAqEuDQ787hg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEHxQ6sCe0KqwZQXFinsp8j5uFg8QlJMW1U2mSkKqKYl/0MqvBaxNfW8JchSryNikfQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "c37b3cb4-f7a2-465d-851d-9e604d216fe3",
+                            SecurityStamp = "150f6de4-598a-41d7-9662-d32d8cd28af7",
                             TwoFactorEnabled = false,
                             UserName = "test"
                         });
@@ -354,8 +390,8 @@ namespace Data.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "b79456ef-4672-45d7-b918-6404424bd858",
-                            RoleId = "8dd315eb-5034-4d8d-8a4b-7096824e654d"
+                            UserId = "ed4cf424-9255-4fe3-9891-7d577f0a3cf7",
+                            RoleId = "62adf12b-1216-4ed4-a3e5-fe0cc720546a"
                         });
                 });
 

@@ -28,9 +28,14 @@
         <span class="text-danger" asp-validation-for="DateOfProduction"></span>
     </div>
     <div class="mb-3">
-        <label asp-for="Producer"></label>
-        <select class="form-control" asp-for="Producer" asp-items="@Html.GetEnumSelectList<Producer>()"></select>
-        <span class="text-danger" asp-validation-for="Producer"></span>
+        <label asp-for="Category"></label>
+        <select class="form-control" asp-for="Category" asp-items="@Html.GetEnumSelectList<Category>()"></select>
+        <span class="text-danger" asp-validation-for="Category"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="ProducerName"></label>
+        <select class="form-control" asp-for="ProducerName" asp-items="@Model.Producers"></select>
+        <span class="text-danger" asp-validation-for="ProducerName"></span>
     </div>
     <div class="mb-3">
         <button class="btn btn-primary" type="submit">Utwórz</button>
