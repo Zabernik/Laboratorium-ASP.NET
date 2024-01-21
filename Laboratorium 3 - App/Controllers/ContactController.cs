@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Laboratorium_3___App.Controllers
 {
-    //[Authorize(Roles = "admin")]
     public class ContactController : Controller
     {
 
@@ -18,12 +17,13 @@ namespace Laboratorium_3___App.Controllers
         }
 
 
-        [AllowAnonymous]
+        [Authorize(Roles = "user, admin")]
         public IActionResult Index()
         {
             return View(_contactService.FindAll());
         }
 
+        [Authorize(Roles = "user, admin")]
         public IActionResult PagedIndex(int page = 1, int size = 5)
         {
             if (size < 2)
@@ -31,13 +31,20 @@ namespace Laboratorium_3___App.Controllers
             return View(_contactService.FindPage(page, size));
         }
 
+        [Authorize(Roles = "admin")]
         [HttpGet]
         public IActionResult Create()
         {
-            //Contact contact = new Contact() { Organizations = _contactService.FindAllOrganizations() };
-            return View();
+            Contact model = new Contact();
+            model.Organizations = _contactService
+                .FindAllOrganizations()
+                .Select(o => new SelectListItem() { Value = o.Id.ToString(), Text = o.Title })
+                .ToList();
+            
+            return View(model);
         }
 
+        [Authorize(Roles = "admin")]
         [HttpPost]
         public IActionResult Create(Contact model)
         {
@@ -46,10 +53,7 @@ namespace Laboratorium_3___App.Controllers
             //    _contactService.Add(model);
             //    return RedirectToAction("Index");
             //}
-            //model.Organizations = _contactService
-            //    .FindAllOrganizations()
-            //    .Select(o => new SelectListItem() { Value = o.Id.ToString(), Text = o.Title })
-            //    .ToList();
+            
             //return View(model);
             if (ModelState.IsValid)
             {
@@ -58,6 +62,8 @@ namespace Laboratorium_3___App.Controllers
             }
             return View(model);
         }
+
+        [Authorize(Roles = "admin")]
         public IActionResult CreateApi()
         {
             return View();
@@ -74,12 +80,14 @@ namespace Laboratorium_3___App.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "admin")]
         [HttpGet]
         public IActionResult Update(int id)
         {
             return View(_contactService.FindById(id));
         }
 
+        [Authorize(Roles = "admin")]
         [HttpPost]
         public IActionResult Update(Contact model)
         {
@@ -91,12 +99,14 @@ namespace Laboratorium_3___App.Controllers
             return View();
         }
 
+        [Authorize(Roles = "admin")]
         [HttpGet]
         public IActionResult Delete(int id)
         {
             return View(_contactService.FindById(id));
         }
 
+        [Authorize(Roles = "admin")]
         [HttpPost]
         public IActionResult Delete(Contact model)
         {
@@ -104,6 +114,7 @@ namespace Laboratorium_3___App.Controllers
             return RedirectToAction("Index");
         }
 
+        [Authorize(Roles = "user")]
         [HttpGet]
         public IActionResult Details(int id)
         {
@@ -112,15 +123,12 @@ namespace Laboratorium_3___App.Controllers
                 return NotFound();
             return View(find);
         }
+
+        [Authorize(Roles = "user")]
         [HttpPost]
         public IActionResult Details() 
         {
             return RedirectToAction("Index");
         }
-
-        //private List<SelectListItem> CreateList()
-        //{
-        //    return _contactService.FindAllOrganizations();
-        //} nie bedzie dzialac
     }
 }

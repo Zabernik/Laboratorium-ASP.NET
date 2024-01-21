@@ -3,6 +3,7 @@ using System;
 using Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240120120519_Update1")]
+    partial class Update1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.13");
@@ -287,15 +290,15 @@ namespace Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "6a6c0990-f368-45ce-8c38-7735e4c8ae0c",
-                            ConcurrencyStamp = "6a6c0990-f368-45ce-8c38-7735e4c8ae0c",
+                            Id = "52205307-a0ab-4a33-909d-febafca8accb",
+                            ConcurrencyStamp = "52205307-a0ab-4a33-909d-febafca8accb",
                             Name = "admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "a5042bb7-5f6e-4412-8aeb-aeb3f9795b27",
-                            ConcurrencyStamp = "a5042bb7-5f6e-4412-8aeb-aeb3f9795b27",
+                            Id = "17b5c83b-c8fd-4b20-aff9-3ec68e12785f",
+                            ConcurrencyStamp = "17b5c83b-c8fd-4b20-aff9-3ec68e12785f",
                             Name = "user",
                             NormalizedName = "USER"
                         });
@@ -390,35 +393,19 @@ namespace Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "41b665a3-1ad4-4bcc-8c2a-b0ba3c79591e",
+                            Id = "d78b66ac-1458-492d-80ff-e54f475fc3d7",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "30513c7e-4d48-4a2f-89c8-afe4a4592a99",
-                            Email = "root@wsei.edu.pl",
+                            ConcurrencyStamp = "87a99063-d61e-45b4-a194-23e7c9b506c0",
+                            Email = "test@wsei.edu.pl",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
-                            NormalizedEmail = "ROOT@WSEI.EDU.PL",
-                            NormalizedUserName = "ROOT",
-                            PasswordHash = "AQAAAAEAACcQAAAAECcMt8B4qpkYezDKd6pN5bBC95gnNmP8DEZiWfjgIN+nM/bE02vkO45E+oY66GuJdQ==",
+                            NormalizedEmail = "TEST@WSEI.EDU.PL",
+                            NormalizedUserName = "TEST",
+                            PasswordHash = "AQAAAAEAACcQAAAAENeaBazHcxNSGnB/KymhlDQtAsyjNUActcCylGaUkAHZQK1ORUrtaQ7CMLeFs1L4+w==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "f2a62b08-8a5d-4e44-87d7-4546ba43da33",
+                            SecurityStamp = "aa4855be-65a9-4138-b539-2f4e86cdd6e0",
                             TwoFactorEnabled = false,
-                            UserName = "root"
-                        },
-                        new
-                        {
-                            Id = "5c798f09-2db6-4578-844a-dd587eb25e96",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "b7a5f876-321d-497e-81be-bd236345e28f",
-                            Email = "user@wsei.edu.pl",
-                            EmailConfirmed = true,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "USER@WSEI.EDU.PL",
-                            NormalizedUserName = "USER",
-                            PasswordHash = "AQAAAAEAACcQAAAAEBWuifHMDu9OLhx4kj5rjGl4emsyOaMPbg+/i9JqkFPv6/nFOF5LN+Ot3y5KtQojFQ==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "5a866a4c-b154-4756-9c25-43038512b912",
-                            TwoFactorEnabled = false,
-                            UserName = "user"
+                            UserName = "test"
                         });
                 });
 
@@ -484,13 +471,8 @@ namespace Data.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "41b665a3-1ad4-4bcc-8c2a-b0ba3c79591e",
-                            RoleId = "6a6c0990-f368-45ce-8c38-7735e4c8ae0c"
-                        },
-                        new
-                        {
-                            UserId = "5c798f09-2db6-4578-844a-dd587eb25e96",
-                            RoleId = "a5042bb7-5f6e-4412-8aeb-aeb3f9795b27"
+                            UserId = "d78b66ac-1458-492d-80ff-e54f475fc3d7",
+                            RoleId = "52205307-a0ab-4a33-909d-febafca8accb"
                         });
                 });
 

@@ -32,15 +32,25 @@ namespace Data
         {
             base.OnModelCreating(modelBuilder);
 
+            var root = new IdentityUser()
+            {
+                Id = Guid.NewGuid().ToString(),
+                UserName = "root",
+                NormalizedUserName = "ROOT",
+                Email = "root@wsei.edu.pl",
+                NormalizedEmail = "ROOT@WSEI.EDU.PL",
+                EmailConfirmed = true
+            };
             var user = new IdentityUser()
             {
                 Id = Guid.NewGuid().ToString(),
-                UserName = "test",
-                NormalizedUserName = "TEST",
-                Email = "test@wsei.edu.pl",
-                NormalizedEmail = "TEST@WSEI.EDU.PL",
+                UserName = "user",
+                NormalizedUserName = "USER",
+                Email = "user@wsei.edu.pl",
+                NormalizedEmail = "USER@WSEI.EDU.PL",
                 EmailConfirmed = true
             };
+
 
             var adminRole = new IdentityRole()
             {
@@ -48,7 +58,6 @@ namespace Data
                 Name = "admin",
                 NormalizedName = "ADMIN",
             };
-
             var userRole = new IdentityRole()
             {
                 Id = Guid.NewGuid().ToString(),
@@ -57,11 +66,15 @@ namespace Data
             };
 
             adminRole.ConcurrencyStamp = adminRole.Id;
+            userRole.ConcurrencyStamp = userRole.Id;
 
             PasswordHasher<IdentityUser> passwordHasher = new PasswordHasher<IdentityUser>();
 
-            user.PasswordHash = passwordHasher.HashPassword(user, "1234Ab!");
+            root.PasswordHash = passwordHasher.HashPassword(root, "root");
+            user.PasswordHash = passwordHasher.HashPassword(user, "user");
 
+            modelBuilder.Entity<IdentityUser>()
+                .HasData(root);
             modelBuilder.Entity<IdentityUser>()
                 .HasData(user);
 
@@ -75,6 +88,11 @@ namespace Data
                     new IdentityUserRole<string>()
                     {
                         RoleId = adminRole.Id,
+                        UserId = root.Id,
+                    },
+                    new IdentityUserRole<string>()
+                    {
+                        RoleId = userRole.Id,
                         UserId = user.Id,
                     }
                 );

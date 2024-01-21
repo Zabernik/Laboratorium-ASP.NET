@@ -37,7 +37,7 @@ namespace Laboratorium_3___App.Models
 
         [Display(Name = "Cena")]
         [Required]
-        public decimal Price { get; set; }
+        public float Price { get; set; }
 
         [Display(Name = "Data Produkcji")]
         [DataType(DataType.Date)]

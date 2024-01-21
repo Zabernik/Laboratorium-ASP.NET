@@ -10,7 +10,7 @@ namespace Laboratorium_3___App.Models
             {
                 Id = entity.Id,
                 Name = entity.Name,
-                Price = entity.Price,
+                Price = (float)entity.Price,
                 DateOfProduction = entity.DateOfProduction,
                 Description = entity.Description,
                 Category = (Category)entity.Category,
@@ -26,7 +26,7 @@ namespace Laboratorium_3___App.Models
                 Name = product.Name,
                 DateOfProduction = product.DateOfProduction,
                 Description = product.Description,
-                Price = product.Price,
+                Price = (decimal)product.Price,
                 Category = (int)product.Category,
                 ProducerName = product.ProducerName
             };
