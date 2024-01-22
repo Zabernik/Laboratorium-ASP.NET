@@ -77,11 +77,16 @@
             sumHeader.classList.add("productColumn");
             sumHeader.innerHTML = "Suma";
 
+            var actionHeader = document.createElement("div");
+            actionHeader.classList.add("productColumn");
+            actionHeader.innerHTML = "Akcje";
+
             headerRow.appendChild(nameHeader);
             headerRow.appendChild(priceHeader);
             headerRow.appendChild(unitHeader);
             headerRow.appendChild(quantityHeader);
             headerRow.appendChild(sumHeader);
+            headerRow.appendChild(actionHeader);
 
             frame.appendChild(headerRow);
         }
@@ -89,9 +94,9 @@
         var existingProduct = frame.querySelector('.productRow[data-product-id="' + productId + '"]');
 
         if (existingProduct) {
-            var quantityColumn = existingProduct.querySelector('.quantityColumn');
-            var currentQuantity = parseInt(quantityColumn.innerHTML) || 0;
-            quantityColumn.innerHTML = currentQuantity + 1;
+            var quantityColumn = existingProduct.querySelector('.quantityColumn input');
+            var currentQuantity = parseInt(quantityColumn.value) || 0;
+            quantityColumn.value = currentQuantity + 1;
 
             var sumColumn = existingProduct.querySelector('.sumColumn');
             var currentSum = parseFloat(sumColumn.innerHTML) || 0;
@@ -115,22 +120,62 @@
 
             var quantityColumn = document.createElement("div");
             quantityColumn.classList.add("productColumn", "quantityColumn");
-            quantityColumn.innerHTML = "1";
+            var quantityInput = document.createElement("input");
+            quantityInput.type = "number";
+            quantityInput.min = "1";
+            quantityInput.value = "1";
+            quantityInput.addEventListener("input", function () {
+                updateQuantity(productElement);
+            });
+            quantityColumn.appendChild(quantityInput);
 
             var sumColumn = document.createElement("div");
             sumColumn.classList.add("productColumn", "sumColumn");
             sumColumn.innerHTML = parseFloat(productPrice).toFixed(2);
+
+            var actionColumn = document.createElement("div");
+            actionColumn.classList.add("productColumn", "actionColumn");
+            var deleteButton = document.createElement("button");
+            deleteButton.innerHTML = "Usuń";
+            deleteButton.classList.add("btn", "btn-outline-danger"); // Dodaj klasę Bootstrapa
+            deleteButton.addEventListener("click", function () {
+                deleteProduct(productElement);
+            });
+
+            actionColumn.appendChild(deleteButton);
 
             productElement.appendChild(nameColumn);
             productElement.appendChild(priceColumn);
             productElement.appendChild(unitColumn);
             productElement.appendChild(quantityColumn);
             productElement.appendChild(sumColumn);
+            productElement.appendChild(actionColumn);
 
             frame.appendChild(productElement);
         }
 
         frame.style.height = frame.scrollHeight + "px";
+
+        // Aktualizuj sumę
+        updateTotalSum();
+    }
+
+    function updateQuantity(productElement) {
+        var quantityColumn = productElement.querySelector('.quantityColumn input');
+        var currentQuantity = parseInt(quantityColumn.value) || 0;
+        var sumColumn = productElement.querySelector('.sumColumn');
+        var priceColumn = productElement.querySelector('.productColumn:nth-child(2)');
+
+        var productPrice = parseFloat(priceColumn.innerHTML) || 0;
+        sumColumn.innerHTML = (currentQuantity * productPrice).toFixed(2);
+
+        // Aktualizuj sumę
+        updateTotalSum();
+    }
+
+    function deleteProduct(productElement) {
+        var frame = document.getElementById("commonFrame");
+        frame.removeChild(productElement);
 
         // Aktualizuj sumę
         updateTotalSum();
@@ -152,9 +197,45 @@
             if (totalSumColumn) {
                 totalSumColumn.innerHTML = totalSum.toFixed(2);
             }
+
+            // Dostosuj wygląd po aktualizacji sumy
+            adjustLayout();
+        }
+    }
+
+    function adjustLayout() {
+        var frame = document.getElementById("commonFrame");
+        if (frame) {
+            // Zaktualizuj wysokość ramki po aktualizacji sumy
+            var sumElements = frame.querySelectorAll('.sumColumn');
+            var totalSum = 0;
+
+            sumElements.forEach(function (sumElement) {
+                totalSum += parseFloat(sumElement.innerHTML) || 0;
+            });
+
+            // Dostosuj wysokość ramki na podstawie liczby produktów i sumy
+            var numberOfProducts = frame.querySelectorAll('.productRow').length;
+            var frameHeight = 40 + Math.max(30 * numberOfProducts, 30); // Minimalna wysokość to 40, ale może być większa w zależności od liczby produktów
+
+            // Wartość 30 to wysokość każdego wiersza, możesz dostosować tę wartość według własnych preferencji
+            var newHeight = Math.max(frameHeight, totalSum > 0 ? frameHeight + 50 : frameHeight); // Dodaj dodatkową wysokość, gdy suma jest większa niż 0
+
+            // Dostosuj również wysokość na podstawie przycisku "Del"
+            var deleteButtons = frame.querySelectorAll('.btn.btn-outline-danger');
+            deleteButtons.forEach(function (deleteButton) {
+                var deleteButtonHeight = deleteButton.offsetHeight;
+                newHeight += deleteButtonHeight;
+            });
+
+            frame.style.height = newHeight + "px";
         }
     }
 </script>
+
+
+
+
 
 @{
 }
@@ -214,6 +295,7 @@
                 <div class="productColumn">Jednostka</div>
                 <div class="productColumn">Ilość</div>
                 <div class="productColumn">Suma</div>
+                <div class="productColumn">Akcje</div>
             </div>
             <!-- Tutaj będą dodawane produkty -->
         </div>
